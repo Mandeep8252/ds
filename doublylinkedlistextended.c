@@ -160,11 +160,46 @@ void deleterandom(){
         printf("Node deleted\n");
     }
 }
+void deletebyval(){
+    char x[100];
+    struct node *temp=head;
+    printf("Enter the name you want to delete");
+    scanf("%s",x);
+    if(head==NULL){
+        printf("Nothing to delete\n");
+        
+    }
+    else if(strcmp(head->name,x)==0 && head->next==NULL){
+        free(head);
+        head=NULL;
+    }
+    else{
+        while(strcmp(temp->name,x)!=0){
+            temp=temp->next;
+            if(temp==NULL){
+                printf("Name do not exist\n");
+                return;
+            }
+                
+            }
+            if(temp->next==NULL){
+                temp->prev->next=NULL;
+                free(temp);
+            }
+            else{
+                temp->prev->next=temp->next;
+                temp->next->prev=temp->prev;
+                free(temp);
+            }
+            printf("Node deleted\n");
+            
+    }
+}
 
 int main(){
     char x[100];
     int y,choice;
-    printf("1.Insertbeg\n2.Insertlast\n3.deletebeg\n4.deletelast\n5.display\n6.insertrandom\n7.Deleterandom\n8.exit\n");
+    printf("1.Insertbeg\n2.Insertlast\n3.deletebeg\n4.deletelast\n5.display\n6.insertrandom\n7.Deleterandom\n8.Deletebyval\n9.exit\n");
    
    while(1){
         printf("Enter choice:");
@@ -205,6 +240,9 @@ int main(){
                 deleterandom();
                 break;
             case 8:
+                deletebyval();
+                break;
+            case 9:
                 return 0;
                 
         
